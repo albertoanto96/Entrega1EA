@@ -1,0 +1,55 @@
+<!doctype html>
+<html ng-app="myApp" >
+<head>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="js/controllers/user.controller.js"></script>
+    <script src="js/services/user.service.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/user.css">
+</head>
+<body id="back">
+<h2>User Management</h2>
+<div ng-controller="userCtrl">
+
+    <ul class="unstyled">
+        <li ng-repeat="user in users | filter:search">
+            <label class="checkbox">
+                <input type="checkbox" ng-model="user.done">
+                <span class="done-{{user.done}}">Name: {{user.name}} Password: {{user.password}}</span>
+            </label>
+        </li>
+    </ul>
+    <br><br>
+    <table id="searchTextResults">
+        <tr>
+            <th>Name</th>
+            <th>Pass</th>
+        </tr>
+        <tr ng-repeat="user in users | filter:search">
+            <td>{{user.name}}</td>
+            <td>{{user.password}}</td>
+        </tr>
+    </table>
+    <form ng-submit="userAdd()">
+        <input type="text" ng-model="userName" size="30"
+               placeholder="Add name">
+        <input type="text" ng-model="userPass" size="30"
+               placeholder="Add pass">
+        <input type="text" ng-model="newPass" size="30"
+               placeholder="New password">
+        <input type="text" ng-model="filterDB" size="30"
+               placeholder="Search in database">
+        <input type="text" ng-model="search.name" size="30"
+               placeholder="Search">
+        <input class ="button" type="submit" value="add">
+    </form>
+    <button class ="button" ng-click="remove()">Remove</button>
+    <button class ="button" ng-click="showList()">Show List</button>
+    <button class ="button" ng-click="update()">Update User</button>
+    <button class ="button" ng-click="filterdb()">Filter by letter</button>
+
+    <br><br><br>
+</div>
+</body>
+</html>
